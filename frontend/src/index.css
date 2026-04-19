@@ -24,6 +24,32 @@
 }
 
 @layer utilities {
+  @keyframes floatBlob {
+    0% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(18px, -14px, 0) scale(1.08);
+    }
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  .floating-blob {
+    animation: floatBlob 10s ease-in-out infinite;
+  }
+
+  .floating-blob-delayed {
+    animation: floatBlob 13s ease-in-out infinite;
+    animation-delay: 1.4s;
+  }
+
+  .floating-blob-slow {
+    animation: floatBlob 16s ease-in-out infinite;
+    animation-delay: 0.8s;
+  }
+
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
