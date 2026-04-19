@@ -87,14 +87,20 @@ const startServer = async () => {
     console.log("Running in memory fallback mode (no MongoDB).");
   }
 
-  const server = app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);
-  });
+  // Vercel serverless functions do not need `app.listen`
+  if (!process.env.VERCEL) {
+    const server = app.listen(PORT, () => {
+      console.log(`Server started on port ${PORT}`);
+    });
 
-  server.on("error", (err) => {
-    console.error("Server error:", err.message);
-    process.exit(1);
-  });
+    server.on("error", (err) => {
+      console.error("Server error:", err.message);
+      process.exit(1);
+    });
+  }
 };
 
 startServer();
+
+// Export the Express app for Vercel serverless functions
+module.exports = app;
